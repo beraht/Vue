@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript" src="./vue.js" ></script>
+	</head>
+	<body>		
+		<div id="app">
+            <!-- 给组件绑定原生事件 .native -->
+            <child @click.native="handleClick" ></child>   
+            <child @click.native="handleClick" ></child> 
+		</div>
+	</body>
+    <script type="text/javascript">
+
+        //定义一个全局组件
+        Vue.component('child',{
+            template: "<div> 11111111 </div>",
+        })
+
+
+        var data = {};
+        var vm  = new Vue({
+            el : "#app",
+            data :data,
+            methods: {
+                handleClick : function(){
+                    console.log(1111111)
+                }
+            },
+        });
+	
+	</script>
+</html>
