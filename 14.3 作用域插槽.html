@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript" src="./vue.js" ></script>
+	</head>
+	<body>		
+		<div id="app">
+            <body-content >
+                <!-- 1.定义一个作用插槽 -->
+                <!-- 1.1 slot-scope 声明从子组件接收的数据放在 valName 里面 -->
+                <!-- 1.2 接收到数据后,以 H1 形式展示 -->
+                <template slot-scope="valName">
+                    <h1>{{valName.item}}</h1>
+                </template>
+            </body-content>  
+		</div>
+	</body>
+    <script type="text/javascript">
+        //定义一个全局子组件
+        Vue.component('body-content',{
+            data: function(){
+                return {
+                    list : [1,2,3,4,5,6]
+                }
+            },
+            //2.什么时候使用作用域插槽?
+            //2.1.当子组件做循环的时候,或者某一部分做循环的时候
+            //2.2.某一部分的dom结构由外面的传递进来的dom元素决定的时候
+            
+            //3.子组件可以向父组件插槽里面传数据,父组件插槽想接收这个数据必须在外层 template slot-scope="valName"
+            //3.1  子组件 使用了 :item="item" 传递数据,父组件插槽就可以valName.item 使用里面的值
+            template: `<div> 
+                            <ul>
+                                <slot v-for="item of list"  :item="item" > </slot>
+                            </ul>
+                        </div>`,
+        })
+
+
+        var data = {};
+        var vm  = new Vue({
+            el : "#app",
+            data :data,
+            methods: {
+                handleClick : function(){
+                    console.log(1111111)
+                }
+            },
+        });
+	
+	</script>
+</html>

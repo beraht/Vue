@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript" src="./vue.js" ></script>
+	</head>
+	<body>		
+		<div id="app">
+            <child >
+                <!-- 子组件内插入内容,插槽的语法-->
+                <!-- 1. 定义了一个插槽, 向子组件传递一个dom元素-->
+                <h1>Dell1</h1>
+            </child>  
+		</div>
+	</body>
+    <script type="text/javascript">
+        //定义一个全局子组件
+        Vue.component('child',{
+            // 2.子组件使用插槽内的内容
+            //2.1 solt 显示的是 父组件向子组件插入的那一段p标签
+            //2.2 如果没有传入插槽, 那么 slot 会显示默认的值
+            template: `<div> 
+                            <p>hello</p>
+                            <slot>默认内容</slot>
+                        </div>`,
+        })
+
+
+        var data = {};
+        var vm  = new Vue({
+            el : "#app",
+            data :data,
+            methods: {
+                handleClick : function(){
+                    console.log(1111111)
+                }
+            },
+        });
+	
+	</script>
+</html>

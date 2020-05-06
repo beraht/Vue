@@ -36,7 +36,7 @@
                 }
             },
             mounted: function() { //生命周期函数
-            var _this = this
+                var _this = this
                 //监听bus的改变 ,发生改变时,所有的组件都会触发一次
                 this.bus.$on('change',function(msg){
                     _this.selfContent = msg //将所有的组件的内容改为一致

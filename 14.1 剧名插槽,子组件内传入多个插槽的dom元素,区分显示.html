@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript" src="./vue.js" ></script>
+	</head>
+	<body>		
+		<div id="app">
+            <body-content >
+                <!-- 子组件内插入内容,插槽的语法-->
+                <!-- 1. 定义了插槽, 向子组件传递dom元素-->
+                <!---1.1 给定义的插槽起一个名字,方便子组件区分 -->
+                <div class="header" slot="header"> header </div>
+                <div class="footer" slot="footer"> footer </div>
+            </body-content>  
+		</div>
+	</body>
+    <script type="text/javascript">
+        //定义一个全局子组件
+        Vue.component('body-content',{
+            // 2.子组件使用插槽内的内容
+            //2.1 solt 显示的是 父组件向子组件插入的那一段p标签
+            //2.2 如果没有传入插槽, 那么 slot 会显示默认的值
+            //2.3 根据起的slot名字,分开显示不同的内容
+            template: `<div> 
+                            <slot name="header">默认内容1</slot>
+                            <div>content</div>
+                            <slot name="footer">默认内容2</slot>
+                        </div>`,
+        })
+
+
+        var data = {};
+        var vm  = new Vue({
+            el : "#app",
+            data :data,
+            methods: {
+                handleClick : function(){
+                    console.log(1111111)
+                }
+            },
+        });
+	
+	</script>
+</html>
