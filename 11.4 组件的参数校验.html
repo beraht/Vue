@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript" src="./vue.js" ></script>
+	</head>
+	<body>		
+		<div id="app">
+            <!-- 1.父组件向子组件传递数据 -->
+            <child :content="'hello123'" ></child>   
+            <child :content="'hello123'" ></child> 
+		</div>
+	</body>
+    <script type="text/javascript">
+
+        //定义一个全局组件
+        Vue.component('child',{
+            //2.接收数据,并校验
+            props:{
+                //2.1接收的数据content 必须是string类型/Number
+                //content : [String,Number]  
+               content: {
+                   type : [String,Number], //类型
+                  // required : true,  //必传,
+                  // default : "default value"  //不传有默认值
+                   validator : function(value) {
+                       //校验长度大于5 返回 true
+                        return (value.length > 5)
+                  }
+               }
+            },
+            template: "<div> {{content}} </div>",
+        })
+
+
+        var data = {};
+        var vm  = new Vue({
+            el : "#app",
+            data :data
+        });
+	
+	</script>
+</html>
