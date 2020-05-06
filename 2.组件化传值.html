@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript" src="./vue.js" ></script>
+	</head>
+	<body>
+		
+		<!--#app 以下其实就是vue实例下的模板-->
+		<div id="app">
+			<!--v-model: 双向绑定数据-->
+			<input type="text" v-model="inputValue">
+			<button type="button" v-on:click="handleBtnClick" >提交</button>
+			<ul>
+				<!--<li v-for="item in list "> {{item}} </li>-->
+				<!--相当于外层来说,这里是一个子组件,想要子组件现实想要的内容,如何传递?
+				v-bind: 表示向子组件传递一个绑定值的意思
+				v-bind:content = item 的意思: 
+					循环list的时候, list 的值赋值给item,通过 v-bind:content="item" 
+					v-bind的形式传递给todo-item,怎么传?通过content变量来传,
+				-->
+				
+				<!--5.监听delete事件,自动触发hangldItemDelete方法-->
+				<todo-item  
+						v-bind:content="item"  
+						v-bind:index="index"  
+						v-for="(item,index) in list"
+						@delete="hangldItemDelete"
+				></todo-item>
+			</ul>
+		</div>
+		
+		
+	</body>
+	<script type="text/javascript">
+		//局部组件 2.使用,相当于创建了一个子组件
+		var TodoItem = {
+		 	//需要外部接收的参数变量,对应的 v-bind:xxx 的变量
+			 	props:['content','index'],	
+				//组件的模板最终会调换掉 todo-item 
+				//1.hangldItemClick 用于监听要处理的元素
+			 	template:"<li @click='hangldItemClick'>{{content}}</li>",
+				methods:{
+					hangldItemClick: function(){
+						//2.要删除子组件的内容,内容是通过父组件的list数组进行循环显示的,list控制显示多少个
+						//3.解决办法是:将子组件绑定的内容,传递给父组件,父组件去改变list数据
+						this.$emit('delete',this.index); //4.向外触发一个delete事件,携带要删除的主键key
+					}
+				}
+		}
+		
+		
+		data = {
+			list:[],
+			inputValue : "",
+			}
+			
+		//vue的实例,相当于一个父组件	
+		var vm = new Vue({
+			el:"#app",
+			components:{
+				//1.注册TodoItem 局部组件
+				TodoItem:TodoItem
+			},
+			data:data,
+			methods:{
+				handleBtnClick: function(){
+					//点击按钮获取input的数据,往list数组中添加数据
+					this.list.push(this.inputValue);
+					this.inputValue='';
+					console.log(this.list)
+				},
+				hangldItemDelete:function(index){
+					//6.监听到了delete事件,并获取到key
+					console.log("监听到了delete事件,key为:"+index);
+					this.list.splice(index,1)
+		
+				}
+			}
+		})
+		
+	</script>
+</html>

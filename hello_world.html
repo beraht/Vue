@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>hello world</title>
+		<script  src="./vue.js" ></script>
+	</head>
+	
+		
+	<body>
+		<div id="app">{{ messge }}</div>	
+			
+		<script type="text/javascript">
+			data = {messge: "hello-world"};
+			var vm = new Vue({
+				el : '#app',
+				data : data,
+			})
+			var i = 10000;
+			setTimeout(function(){
+				i++;
+				vm.$data.messge = 'hahahahha'+ Date().toDateString();
+			},2000)
+			
+			
+		</script>
+	</body>
+
+</html>

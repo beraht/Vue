@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+        <script  src="./vue.js" ></script>
+	</head>
+	<body>
+		<div id="root">
+            <template  v-for="(item,index) in list" >
+                <div>
+                    {{item}}
+                </div>
+            </template>
+		</div>
+	</body>
+	<script>		
+        //在控制台中 vm.list.push(7), 添加了数据,数据发生变化,页面也会变化
+        //在控制台中 Vue.set(vm.list,1,10),  下标等于1的改为10,数据发生变化,页面也会变化
+        //在控制台中 Vue.set(vm.list,1,10),  下标等于1的改为10,数据发生变化,页面也会变化
+		var data = {
+            list : [1,2,3,4,5,6]
+        }
+		var vm = new Vue({
+			el : "#root",
+			data : data,			
+		});
+	</script>
+
+</html>

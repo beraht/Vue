@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+        <script  src="./vue.js" ></script>
+        <style>
+            .act {
+                color: red;
+            }
+        </style>
+	</head>
+	<body>
+		<div id="root">
+
+            <!-- 对象 -->
+            <h1 @click="handleMsg" :class="{act : isact}"  >{{message}}</h1>
+
+            <!-- 数组 里面对应的是 css 样式 -->
+            <h1 @click="handleMsg1" :class="[acts]"  >{{message}}</h1>    
+            
+		</div>
+		
+	</body>
+	<script>		
+		var data = {
+            message : "hello world",
+            isact : false ,
+            acts : ""            
+        }
+		var vm = new Vue({
+			el : "#root",
+			data : data,
+			methods:{
+				handleMsg : function(){
+					//点击修改样式
+                    this.isact = !this.isact;
+				},
+                handleMsg1 : function(){
+					//点击修改样式,
+                    // this.isact = !this.isact;
+                    if(this.acts == "act"){ //对应的是css的 选择器名
+                        this.acts = ""
+                    }else{
+                        this.acts = "act"
+                    }
+                        
+				}
+			},
+			
+		});
+	</script>
+
+</html>

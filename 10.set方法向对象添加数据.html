@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+        <script  src="./vue.js" ></script>
+	</head>
+	<body>
+		<div id="root">
+            <div v-for="(itme1,key) in userInfo" :key="key">
+                {{itme1}}----{{key}}
+            </div>
+		</div>
+		
+	</body>
+	<script>	
+    //在控制台中 Vue.set(vm.userInfo,"address","beijing"),添加了数据,数据发生变化,页面也会变化	
+    //在控制台中 vm.$set(vm.userInfo,"address","beijing"),添加了数据,数据发生变化,页面也会变化	
+    //通过set方法向对象添加数据,数据发生变化,页面也会变化	
+		var data = {
+            //用户对象
+            userInfo :{
+                name : "dell",
+                age : 28,
+                gender : "male",
+                salary : "secret"
+            }
+        }
+		var vm = new Vue({
+			el : "#root",
+			data : data,			
+		});
+	</script>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+        <script  src="./vue.js" ></script>
+        <style>
+            .act {
+                color: red;
+            }
+        </style>
+	</head>
+	<body>
+		<div id="root">
+
+            <!-- 对象 -->
+            <h1 @click="handleMsg" :style="styleObj"  >{{message}}</h1>
+            
+		</div>
+		
+	</body>
+	<script>		
+		var data = {
+            message : "hello world",
+            styleObj: {
+                color : "black"
+            }         
+        }
+		var vm = new Vue({
+			el : "#root",
+			data : data,
+			methods:{
+				handleMsg : function(){
+					this.styleObj.color = this.styleObj.color === "black" ? "red" : "black";
+				}
+			},
+			
+		});
+	</script>
+
+</html>

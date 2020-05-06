@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript" src="./vue.js" ></script>
+	</head>
+	<body>
+		<div id="app">
+			<!--v-model: 双向绑定数据-->
+			<input type="text" v-model="inputValue">
+			<button type="button" v-on:click="handleBtnClick" >提交</button>
+			<ul>
+				<!--<li v-for="item in list "> {{item}} </li>-->
+				<!--相当于外层来说,这里是一个子组件,想要子组件现实想要的内容,如何传递?
+				v-bind: 表示向子组件传递一个绑定值的意思
+				v-bind:content = item 的意思: 
+					循环list的时候, list 的值赋值给item,通过 v-bind:content="item" 
+					v-bind的形式传递给todo-item,怎么传?通过content变量来传,
+				-->
+				<todo-item  
+						v-bind:content="item"  
+						v-for="item in list "
+				></todo-item>
+			</ul>
+		</div>
+		
+		
+	</body>
+	<script type="text/javascript">
+		//全局组件
+		// Vue.component("TodoItem",{
+		// 	//需要外部接收的参数变量,对应的 v-bind:xxx 的变量
+		// 	props:['content'],	
+		// 	template:"<li>{{content}}</li>"
+		// });
+		
+		//局部组件 2.使用
+		var TodoItem ={
+		 	//需要外部接收的参数变量,对应的 v-bind:xxx 的变量
+			 	props:['content'],	
+				//组件的模板最终会调换掉 todo-item 
+			 	template:"<li>{{content}}</li>"
+		}
+		
+		
+		data = {
+			list:[],
+			inputValue : "",
+			}
+		var vm = new Vue({
+			el:"#app",
+			components:{
+				//1.注册TodoItem 局部组件
+				TodoItem:TodoItem
+			},
+			data:data,
+			methods:{
+				handleBtnClick: function(){
+					//点击按钮获取input的数据,往list数组中添加数据
+					this.list.push(this.inputValue);
+					this.inputValue='';
+					console.log(this.list)
+				}
+			}
+		})
+		
+	</script>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript" src="./vue.js" ></script>
+	</head>
+	<body>		
+		<!-- 父组件向子组件传递数据 -->
+		<div id="app">
+			<!-- 1.父组件通过属性的方式传递 -->
+			<counter :count="n1" ref="one" @change="changeFun"  ></counter>	
+			<counter :count="n2" ref="two" @change="changeFun" ></counter>	
+			<div>{{total}}</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+
+		//定义一个局部组件
+		var counter = {
+			//2.子组件接收数据,不可以直接修改父组件传过来的值,如 this.count++
+			props:['count'],
+			data :function() { 
+				return {
+					number1 : this.count
+				}
+			},
+			template: '<div @click="handleClick"> {{number1}} </div>',
+			methods:{
+				handleClick:function(){
+					this.number1++
+					//通过事件 子组件 向 父组件传递 数据  同时传1
+					this.$emit("change",1)
+				}
+			}
+		}
+
+		var data = {total:0,n1:0,n2:0};
+		var vm = new Vue({
+			el : "#app",
+			components : {
+				//注册局部组件
+				counter : counter,
+			},
+			data : data,
+			methods:{
+				changeFun : function(value){ //通过事件传递的值为value
+					//通过引用找到两个值( 键名为nubmer1 ),加起来
+					this.total = this.$refs.one.number1 + this.$refs.two.number1
+				
+				}
+			}
+		})
+	</script>
+</html>

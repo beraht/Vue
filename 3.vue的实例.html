@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+			<script  src="./vue.js" ></script>
+	</head>
+	<body>
+		<div id="root">
+			<h1 @click="handleMsg" >{{message}}</h1>
+				
+			<item></item>
+			
+		</div>
+		
+	</body>
+	<script>
+		
+		Vue.component('item',{
+			template:'<h2> hello item  </h2>'
+		})
+		
+		var data = { message : "hello world" }
+		var vm = new Vue({
+			el : "#root",
+			data : data,
+			methods:{
+				handleMsg : function(){
+					console.log(1111111)
+				}
+			},
+			
+		});
+	</script>
+
+</html>

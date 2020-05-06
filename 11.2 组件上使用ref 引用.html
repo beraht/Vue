@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript" src="./vue.js" ></script>
+	</head>
+	<body>		
+		<div id="app">
+			<counter ref="one" @change="changeFun" ></counter>
+			<counter ref="two" @change="changeFun" ></counter>
+			<div>{{total}}</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+
+		Vue.component('counter',{
+			data:function(){
+				return {
+					number1 : 0,
+				}
+			},
+			methods: {
+				handleClick : function(){
+					this.number1++
+					//子组件向父组件传值
+					this.$emit("change")
+				}
+			},
+
+			template: "<div @click='handleClick' >{{number1}}</div>",
+
+		})
+
+		var data = {total:0};
+		var vm = new Vue({
+			el : "#app",
+			data : data,
+			methods:{
+				changeFun : function(){
+					//通过引用找到两个值( 键名为nubmer1 ),加起来
+					this.total = this.$refs.one.number1 + this.$refs.two.number1
+				
+				}
+			}
+		})
+	</script>
+</html>

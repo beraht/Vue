@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+        <script  src="./vue.js" ></script>
+	</head>
+	<body>
+		<div id="root">
+            <template  v-for="(item,index) in list" >
+                <div>
+                    {{item.text}}--------{{item.id}}
+                </div>
+                <span>{{item.text}}</span>
+            </template>
+
+            <div v-for="(itme1,key) in userInfo" :key="key">
+                {{itme1}}----{{key}}
+            </div>
+
+
+		</div>
+		
+	</body>
+	<script>		
+		var data = {
+            list : [
+                {
+                    "id":"11100",
+                    "text" : "dasd1asdas",
+                },
+                {
+                    "id":"11101",
+                    "text" : "da2sdasdas",
+                },
+                {
+                    "id":"11102",
+                    "text" : "da2s2dasdas",
+                }, {
+                    "id":"11103",
+                    "text" : "d2asd2asdas",
+                },
+                {
+                    "id":"11104",
+                    "text" : "da2sd2asdas",
+                },
+                {
+                    "id":"11105",
+                    "text" : "da2sd2asdas",
+                }
+            ],
+            //用户对象
+            userInfo :{
+                name : "dell",
+                age : 28,
+                gender : "male",
+                salary : "secret"
+            }
+        }
+		var vm = new Vue({
+			el : "#root",
+			data : data,			
+		});
+	</script>
+
+</html>
