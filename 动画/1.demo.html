@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+        <script type="text/javascript" src="../vue.js" ></script>
+        <style>
+
+            /* 隐藏 -> 显示的动画 */
+            .fade-enter,
+            .fade-leave-to {
+                opacity: 0;
+            }
+            .fade-enter-active,
+            .fade-leave-active {
+                transition: opacity 3s
+            }
+
+            /* 显示 -> 隐藏的动画 */
+
+            /* .fade-leave-to {
+                opacity: 0;
+            }
+            .fade-leave-active{
+                transition: opacity 3s
+            } */
+
+
+        </style>
+	</head>
+	<body>
+		
+		<div id="app">
+            <!-- transition包裹的标签里面有一个过渡的动画效果 -->
+            <!-- 隐藏 -> 显示
+                1.动画执行的一瞬间: 会在包裹的标签上 添加class名字, fade-enter fade-enter-active
+                2.动画执行的第一针结束后,vue分析这个标签是一个动画效果
+                3.动画执行到第二针的时候,把之前的class为fade-enter 去掉, 然后在新增一个fade-enter-to
+                4.动画执行到快结束的一瞬间,去除掉fade-enter-active 和 fade-enter-to
+                5.transition name="fade"  不取名的话,css 为 v-enter 
+            -->
+
+            <!-- 显示 -> 隐藏 
+                1.动画执行的一瞬间: 会在包裹的标签上 添加class名字, fade-leave fade-leave-active
+                2.动画执行的第一针结束后,vue分析这个标签是一个动画效果
+                3.动画执行到第二针的时候,把之前的class为fade-leave 去掉, 然后在新增一个fade-leave-to
+                4.动画执行到快结束的一瞬间,去除掉fade-leave-active 和 fade-leave-to
+                5.transition name="fade"  不取名的话,css 为 v-leave-xxx 
+            -->
+            <transition name="fade">
+                <h3 v-if="show"> hello </h3>
+            </transition>
+                
+            <button @click="handleClick">按钮</button>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var data = {show:true};
+		var vm = new Vue({
+			el : "#app",
+			data : data,
+            methods: {
+                handleClick:function(){
+                    this.show = !this.show;
+                }
+            },
+		})
+	</script>
+</html>
